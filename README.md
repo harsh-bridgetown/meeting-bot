@@ -116,6 +116,25 @@ For more details, follow [this guide](https://developers.zoom.us/docs/meeting-sd
 - Paste the link into your browser to confirm your account.
 - You should now be able to log in, input your credentials and obtain an API key. API calls should be directed to http://localhost:8000 instead of https://app.attendee.dev.
 
+## Deploying to AWS
+
+To deploy Attendee on Amazon ECS, run `scripts/deploy_to_aws.sh`. The script
+builds the Docker image, pushes it to Amazon ECR and updates your ECS service.
+Before running it, set the following environment variables as needed:
+
+```
+AWS_REGION           # AWS region (default: us-east-1)
+ECR_REPO_NAME        # Name of the ECR repository
+ECS_CLUSTER          # ECS cluster name
+ECS_SERVICE          # ECS service to update
+ECS_TASK_FAMILY      # Task definition family
+EXECUTION_ROLE_ARN   # ARN of the ECS execution role
+TASK_ROLE_ARN        # ARN of the ECS task role
+```
+
+The script requires an existing ECS cluster and service. After execution the
+service will launch the new image.
+
 
 ## Contribute 
 
